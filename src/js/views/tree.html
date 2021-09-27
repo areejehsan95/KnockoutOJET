@@ -1,0 +1,48 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            
+    <oj-table id="table" aria-label="Tasks Table"
+                data="[[arrayTreeDataProvider]]" 
+                class='oj-bg-body demo-table-container'
+                layout='fixed'
+                columns='[{"headerText": "Task Name", "sortProperty": "attr.name", "weight": 2},
+                {"headerText": "Resource", "sortProperty": "attr.resource"},
+                {"headerText": "Start Date", "sortProperty": "attr.start"},
+                {"headerText": "End Date", "sortProperty": "attr.end"}]'>
+      <template slot="rowTemplate" data-oj-as='row'>
+        <tr>
+          <!-- ko if: row.item.metadata.treeDepth === 0 -->
+            <td>
+              <oj-row-expander context="[[row]]"></oj-row-expander>
+              <span><oj-bind-text value="[[row.item.data.attr.name]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[row.item.data.attr.resource]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[row.item.data.attr.start]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[row.item.data.attr.end]]"></oj-bind-text></span>
+            </td>
+          <!-- /ko -->
+          <!-- ko if: row.item.metadata.treeDepth === 1 -->
+            <td colspan="1">
+              <span><oj-bind-text value="[[row.item.data.attr.detail]]"></oj-bind-text></span>
+            </td>
+            <td colspan="3">
+              <oj-chart type='pie'
+                series="[[[{'name': 'Complete', items: [row.item.data.attr.complete]}, {'name': 'Incomplete', items: [row.item.data.attr.incomplete]}]]]"
+                style-defaults='{"dataLabelPosition": "center"}'
+                legend='{"position": "bottom"}'
+                class="demo-table-chart">
+              </oj-chart>
+            </td>
+          <!-- /ko -->
+        </tr>
+      </template>
+    </oj-table>
+    
+    
+  </div>
+</div>

@@ -1,0 +1,297 @@
+[
+    {
+      "id": 1,
+      "name": "Baseball",
+      "short_desc": "Equipment we carry for baseball players.",
+      "StartDate": "2014-06-13",
+      "image": "css/images/product_images/baseball.jpg",
+      "Price": 35,
+      "Tax" : 3,
+      "CustomParent" : -1,
+      "children": [
+        {
+          "id": 15,
+          "name": "SureCatch Baseball Glove",
+          "short_desc": "All-purpose baseball glove",
+          "Price": 25.5,
+          "Tax": 73,
+          "CustomParent" : 1,
+          "Tax_shipped": 21,
+          "Tax_instock": 52,
+          "activity_id": 1,
+          "image": "css/images/product_images/alglove.jpg",
+          "children": [
+            {
+              "id": 50,
+              "name": "GloveChild",
+              "short_desc": "All-purpose baseball glove",
+              "Price": 50,
+              "Tax": 50,
+              "CustomParent" : 15,
+              "Tax_shipped": 21,
+              "Tax_instock": 52,
+              "activity_id": 1,
+              "image": "css/images/product_images/alglove.jpg",
+              "children": null
+            }]
+        },
+        {
+          "id": 16,
+          "name": "Western R16 Helmet",
+          "short_desc": "Two-tone batter's helmet",
+          "Price": 30.29,
+          "Tax": 33,
+          "CustomParent" : 1,
+          "Tax_shipped": 25,
+          "Tax_instock": 8,
+          "activity_id": 1,
+          "image": "css/images/product_images/batterhelm.jpg",
+          "children": null
+        },
+        {
+          "id": 17,
+          "name": "Western C1 Helmet",
+          "short_desc": "Blue catcher's helmet",
+          "Price": 38.5,
+          "Tax": 60,
+          "CustomParent" : 1,
+          "Tax_shipped": 43,
+          "Tax_instock": 17,
+          "activity_id": 1,
+          "image": "css/images/product_images/chaphelm.jpg",
+          "children": null
+        },
+        {
+          "id": 18,
+          "name": "Western Bat",
+          "short_desc": "North American maple baseball bat",
+          "Price": 26.94,
+          "Tax": 55,
+          "CustomParent" : 1,
+          "Tax_shipped": 43,
+          "Tax_instock": 12,
+          "activity_id": 1,
+          "image": "css/images/product_images/pucbat.jpg",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Bicycling",
+      "short_desc": "Equipment we carry for biking enthusiasts.",
+      "StartDate": "2014-06-13",
+      "Price": 45,
+      "Tax" : 4,
+      "CustomParent" : -1,
+      "image": "css/images/product_images/gpbike.jpg",
+      "children": [
+        {
+          "id": 10,
+          "name": "Air-Lift Tire Pump",
+          "short_desc": "Foot pump for bikes",
+          "Price": 6.97,
+          "Tax": 30,
+          "CustomParent" : 2,
+          "Tax_shipped": 5,
+          "Tax_instock": 25,
+          "activity_id": 2,
+          "image": "css/images/product_images/tirepump.jpg",
+          "children": null
+        },
+        {
+          "id": 11,
+          "name": "Intact Bike Helmet",
+          "short_desc": "Regular size blue helmet",
+          "Price": 39.99,
+          "Tax": 200,
+          "CustomParent" : 2,
+          "Tax_shipped": 179,
+          "Tax_instock": 21,
+          "activity_id": 2,
+          "image": "css/images/product_images/safthelm.jpg",
+          "children": null
+        },
+        {
+          "id": 12,
+          "name": "Nimbus Bike Tire",
+          "short_desc": "Specialized black tire",
+          "Price": 20,
+          "Tax": 85,
+          "CustomParent" : 2,
+          "Tax_shipped": 12,
+          "Tax_instock": 73,
+          "activity_id": 2,
+          "image": "css/images/product_images/mountainbiketire.jpg",
+          "children": null
+        },
+        {
+          "id": 13,
+          "name": "Refill Water Bottle",
+          "short_desc": "Bottle and holder",
+          "Price": 12.79,
+          "Tax": 35,
+          "CustomParent" : 2,
+          "Tax_shipped": 30,
+          "Tax_instock": 5,
+          "activity_id": 2,
+          "image": "css/images/product_images/waterbottle.jpg",
+          "children": null
+        },
+        {
+          "id": 14,
+          "name": "Swift Boys 21 Speed",
+          "short_desc": "Boy's medium frame",
+          "Price": 129.95,
+          "Tax": 49,
+          "CustomParent" : 2,
+          "Tax_shipped": 9,
+          "Tax_instock": 40,
+          "activity_id": 2,
+          "image": "css/images/product_images/himbike.jpg",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Skiing",
+      "short_desc": "Equipment we carry for skiing enthusiasts.",
+      "StartDate": "2014-06-13",
+      "Price": 25,
+      "Tax" : 5,
+      "CustomParent" : -1,
+      "image": "css/images/product_images/aceboot.jpg",
+      "children": [
+        {
+          "id": 6,
+          "name": "Bunny Ski Boot",
+          "short_desc": "Beginner ski boot",
+          "Price": 95,
+          "Tax": 34,
+          "CustomParent" : 3,
+          "Tax_shipped": 12,
+          "Tax_instock": 22,
+          "activity_id": 3,
+          "image": "css/images/product_images/bunboot.jpg",
+          "children": null
+        },
+        {
+          "id": 7,
+          "name": "Ace Ski Boot",
+          "short_desc": "Advanced ski boot",
+          "Price": 349.25,
+          "Tax": 85,
+          "CustomParent" : 3,
+          "Tax_shipped": 25,
+          "Tax_instock": 60,
+          "activity_id": 3,
+          "image": "css/images/product_images/aceboot.jpg",
+          "children": null
+        },
+        {
+          "id": 8,
+          "name": "Bunny Ski Pole",
+          "short_desc": "Beginner ski pole",
+          "Price": 12.95,
+          "Tax": 100,
+          "CustomParent" : 3,
+          "Tax_shipped": 95,
+          "Tax_instock": 5,
+          "activity_id": 3,
+          "image": "css/images/product_images/bunpole.jpg",
+          "children": null
+        },
+        {
+          "id": 9,
+          "name": "Ace Ski Pole",
+          "short_desc": "Intermediate ski pole",
+          "Price": 25.99,
+          "Tax": 75,
+          "CustomParent" : 3,
+          "Tax_shipped": 69,
+          "Tax_instock": 6,
+          "activity_id": 3,
+          "image": "css/images/product_images/acepole.jpg",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Soccer",
+      "short_desc": "Equipment we carry for soccer players.",
+      "StartDate": "2014-06-13",
+      "Price": 55,
+      "Tax" : 2,
+      "CustomParent" : -1,
+      "image": "css/images/product_images/jrsoccerball.jpg",
+      "children": [
+        {
+          "id": 1,
+          "name": "Black Hawk Elbow Pads",
+          "short_desc": "Elbow pads, pair",
+          "Price": 25.95,
+          "Tax": 1450,
+          "CustomParent" : 4,
+          "Tax_shipped": 600,
+          "Tax_instock": 850,
+          "activity_id": 4,
+          "image": "css/images/product_images/elbowpads.jpg",
+          "children": null
+        },
+        {
+          "id": 2,
+          "name": "World Cup Soccer Ball",
+          "short_desc": "World Cup soccer ball",
+          "Price": 55.9,
+          "Tax": 1225,
+          "CustomParent" : 4,
+          "Tax_shipped": 525,
+          "Tax_instock": 700,
+          "activity_id": 4,
+          "image": "css/images/product_images/worldcupsoccerball.jpg",
+          "children": null
+        },
+        {
+          "id": 3,
+          "name": "Junior Soccer Ball",
+          "short_desc": "Junior soccer ball",
+          "Price": 21.5,
+          "Tax": 100,
+          "CustomParent" : 4,
+          "Tax_shipped": 50,
+          "Tax_instock": 50,
+          "activity_id": 4,
+          "image": "css/images/product_images/jrsoccerball.jpg",
+          "children": null
+        },
+        {
+          "id": 4,
+          "name": "Star Goalie Gloves",
+          "short_desc": "Adult white and blue gloves",
+          "Price": 8.75,
+          "Tax": 200,
+          "CustomParent" : 4,
+          "Tax_shipped": 15,
+          "Tax_instock": 185,
+          "activity_id": 4,
+          "image": "css/images/product_images/stglove.jpg",
+          "children": null
+        },
+        {
+          "id": 5,
+          "name": "SportsNet Soccer Goal",
+          "short_desc": "Full size soccer net",
+          "Price": 49.99,
+          "Tax": 75,
+          "CustomParent" : 4,
+          "Tax_shipped": 39,
+          "Tax_instock": 36,
+          "activity_id": 4,
+          "image": "css/images/product_images/soccernet.jpg",
+          "children": null
+        }
+      ]
+    }
+  ]

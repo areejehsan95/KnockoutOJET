@@ -1,0 +1,30 @@
+<script src="https://igniteui.com/js/modernizr.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.excel-bundled.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.spreadsheet-bundled.js"></script>
+<script src="https://www.igniteui.com/js/external/FileSaver.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"></link>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet"></link>
+
+<div>
+		
+  <body class="demo-disable-bg-image">
+    <div id="sampleDemo" class="demo-padding demo-container">
+      <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                
+        <div id="parentContainer" class="oj-sm-padding-2x">
+            <oj-button on-oj-action='[[selectFiles]]'>
+               <span slot='startIcon' class='oj-ux-ico-plus'></span>
+               Add Files    
+            </oj-button>
+            <div class="oj-sm-padding-1x-top">Selected files:
+              <oj-bind-text value="[[fileNames]]"></oj-bind-text>
+          </div>
+        </div>
+		<div id="excel_data" class="mt-5"></div>
+	</div>

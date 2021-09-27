@@ -1,0 +1,149 @@
+
+<body class="demo-disable-bg-image">
+  <div id="sampleDemo" class="demo-padding demo-container">
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+
+      <div id="tableWrapper">
+        <div id="componentDemoContent" style="width: 1px; min-width: 100%;">              
+
+          <button onclick="ExportToExcel('xlsx')">Export table to excel</button>
+
+        <oj-table id="table" aria-label="Departments Table" class='oj-bg-body demo-table-container'
+          data='[[dataprovider]]' edit-mode='rowEdit' edit-row='{{editRow}}'
+          on-oj-before-row-edit='[[beforeRowEditListener]]' on-oj-before-row-edit-end='[[beforeRowEditEndListener]]'
+          columns-default.sortable='disabled' layout="fixed" columns='[{"field": "id",
+                                  "headerText": "Id",
+                                  "headerClassName": "oj-helper-text-align-end",
+                                  "className": "oj-helper-text-align-end oj-read-only",
+                                  "template": "deptIdTemplate"},
+                                  {"field": "name",
+                                  "weight": "3",
+                                  "minWidth": "10rem",
+                                  "headerText": "Game",
+                                  "template": "deptNameTemplate"},
+                                  {"field": "Price",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Price",
+                                  "template": "PriceTemplate"},
+                                  {"field": "Tax",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Tax",
+                                  "template": "TaxTemplate"},
+                                  {"field": "TotalPrice",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Price",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalPriceTemplate"},
+                                  {"field": "TotalSum",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Sum",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalSumTemplate"},
+                                  {"headerText": "Action",
+                                  "width": "6.2rem",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                                  "template": "actionTemplate"}]'>
+
+        
+          <template slot="deptIdTemplate" data-oj-as="cell">
+            <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+          </template>
+
+          <template slot="deptNameTemplate" data-oj-as="cell">
+            <oj-bind-if test='[[cell.mode=="navigation"]]'>
+              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+            </oj-bind-if>
+            <oj-bind-if test='[[cell.mode=="edit"]]'>
+
+              <oj-input-text id="it1" value="{{rowData.name}}" class="editable"></oj-input-text>
+
+            </oj-bind-if>
+
+          </template>
+
+
+       <template slot="PriceTemplate" data-oj-as="cell">
+            <oj-bind-if test='[[cell.mode=="navigation"]]'>
+                <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+            </oj-bind-if>
+
+
+            <oj-bind-if test='[[cell.mode=="edit"]]'>
+                <oj-input-number id="it3" value="{{rowData.Price}}" min=0 max=5000 step=0 
+                    class="editable"></oj-input-number>
+            </oj-bind-if>
+        </template>
+
+        <template slot="TaxTemplate" data-oj-as="cell">
+            <oj-bind-if test='[[cell.mode=="navigation"]]'>
+                <oj-bind-text  value="[[cell.data]]"></oj-bind-text>
+            </oj-bind-if>
+
+
+            <oj-bind-if test='[[cell.mode=="edit"]]'>
+                <oj-input-number id="it4" value="{{rowData.Tax}}" min=0 max=500 step=0 
+                    class="editable"></oj-input-number>
+            </oj-bind-if>
+        </template>
+
+        <template slot="totalPriceTemplate" data-oj-as="cell">
+            <oj-bind-text  value="[[cell.data()]]"></oj-bind-text>
+      </template>
+
+        <template slot="totalSumTemplate" data-oj-as="cell">  
+            <oj-bind-text  value="[[cell.data()]]"></oj-bind-text>
+        </template>
+
+          
+          <template slot="actionTemplate" data-oj-as="cell">
+            <oj-bind-if test='[[cell.mode=="navigation"]]'>
+              <oj-button display='icons' chroming='borderless' on-oj-action="[[handleUpdate]]">
+                <span slot='startIcon' class="oj-ux-ico-edit"></span>
+                Edit
+              </oj-button>
+            </oj-bind-if>
+
+            <oj-bind-if test='[[cell.mode=="edit"]]'>
+              <oj-toolbar chroming='borderless' class="oj-sm-padding-0-vertical">
+                <oj-button display='icons' on-oj-action="[[handleDone]]">
+                  <span slot='startIcon' class="oj-ux-ico-check"></span>
+                  Save
+                </oj-button>
+                <oj-button display='icons' on-oj-action="[[handleCancel]]">
+                  <span slot='startIcon' class="oj-ux-ico-multiply"></span>
+                  Cancel
+                </oj-button>
+              </oj-toolbar>
+            </oj-bind-if>
+          </template>
+        </oj-table>
+
+        <br>
+        <br>
+        <oj-label for="editedContent">Edited Data:</oj-label>
+        <oj-text-area id="editedContent" rows="3" value="[[editedData]]"></oj-text-area>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <script>
+    function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('table');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+    }
+
+  </script>
+</body>
+
+</html>

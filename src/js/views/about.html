@@ -1,0 +1,205 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%">
+    <div id="tableWrapper">
+      <oj-table
+        id="table"
+        aria-label="Departments Table"
+        class="oj-bg-body demo-table-container"
+        data="[[dataprovider]]"
+        edit-mode="rowEdit"
+        edit-row="{{editRow}}"
+        on-oj-before-row-edit="[[beforeRowEditListener]]"
+        on-oj-before-row-edit-end="[[beforeRowEditEndListener]]"
+        columns-default.sortable="disabled"
+        layout="fixed"
+        columns='[{"field": "DepartmentId",
+                            "headerText": "ReadOnly",
+                            "headerClassName": "oj-helper-text-align-end",
+                            "className": "oj-helper-text-align-end oj-read-only",
+                            "template": "deptIdTemplate"},
+                          {"field": "DepartmentName",
+                            "weight": "3",
+                            "minWidth": "10rem",
+                            "headerText": "InputText",
+                            "template": "deptNameTemplate"},
+                          {"field":"LocationId",
+                            "headerText": "InputText Number",
+                            "headerClassName": "oj-helper-text-align-end",
+                            "className": "oj-helper-text-align-end",
+                            "template": "locIdTemplate"},
+                          {"field":"Type",
+                            "headerText": "SelectSingle",
+                            "weight": "2",
+                            "minWidth": "10rem",
+                            "template": "typeTemplate"},
+                          {"field":"Currency",
+                            "headerText": "Combobox",
+                            "minWidth": "8rem",
+                            "weight": "2",
+                            "template": "currencyTemplate"},
+                          {"field":"StartDate",
+                            "weight": "2",
+                            "minWidth": "10rem",
+                            "headerText": "InputDate",
+                            "template": "dateTemplate"},
+                          {"field":"Primary",
+                            "headerText": "Checkboxset",
+                            "headerStyle": "text-align: center;",
+                            "minWidth": "8rem",
+                            "style": "padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                            "template": "primaryTemplate"},
+                          {"headerText": "Action",
+                            "width": "6.2rem",
+                            "headerStyle": "text-align: center;",
+                            "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                            "template": "actionTemplate"}]'
+      >
+        <template slot="deptIdTemplate" data-oj-as="cell">
+          <oj-bind-text
+            value="[[numberConverter.format(cell.data)]]"
+          ></oj-bind-text>
+        </template>
+
+        <template slot="deptNameTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-input-text
+              id="it1"
+              value="{{rowData.DepartmentName}}"
+              class="editable"
+            ></oj-input-text>
+          </oj-bind-if>
+        </template>
+
+        <template slot="locIdTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text
+              value="[[numberConverter.format(cell.data)]]"
+            ></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-input-text
+              id="it2"
+              value="{{rowData.LocationId}}"
+              validators="[[validators]]"
+              converter="[[numberConverter]]"
+              class="editable"
+            ></oj-input-text>
+          </oj-bind-if>
+        </template>
+
+        <template slot="typeTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-select-single
+              id="ss1"
+              aria-label="type 1"
+              value="{{rowData.Type}}"
+              data="[[departments]]"
+              class="editable"
+            >
+            </oj-select-single>
+          </oj-bind-if>
+        </template>
+
+        <template slot="currencyTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-combobox-one
+              id="co1"
+              aria-label="currency"
+              value="{{rowData.Currency}}"
+              class="editable"
+            >
+              <oj-option value="USD">USD</oj-option>
+              <oj-option value="JPY">JPY</oj-option>
+              <oj-option value="EUR">EUR</oj-option>
+            </oj-combobox-one>
+          </oj-bind-if>
+        </template>
+
+        <template slot="dateTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text
+              value="[[dateConverter.format(cell.data)]]"
+            ></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-input-date
+              id="id1"
+              value="{{rowData.StartDate}}"
+              class="editable"
+            >
+            </oj-input-date>
+          </oj-bind-if>
+        </template>
+
+        <template slot="primaryTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-bind-text
+              value="{{cell.data == 'checked' ? 'Checked' : 'Unchecked'}}"
+            ></oj-bind-text>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-checkboxset
+              id="cs2"
+              value="{{rowData.Primary}}"
+              class="oj-choice-direction-row demo-table-checkbox editable"
+            >
+              <oj-option value="checked"></oj-option>
+            </oj-checkboxset>
+          </oj-bind-if>
+        </template>
+
+        <template slot="actionTemplate" data-oj-as="cell">
+          <oj-bind-if test='[[cell.mode=="navigation"]]'>
+            <oj-button
+              display="icons"
+              chroming="borderless"
+              on-oj-action="[[handleUpdate]]"
+            >
+              <span slot="startIcon" class="oj-ux-ico-edit"></span>
+              Edit
+            </oj-button>
+          </oj-bind-if>
+
+          <oj-bind-if test='[[cell.mode=="edit"]]'>
+            <oj-toolbar chroming="borderless" class="oj-sm-padding-0-vertical">
+              <oj-button display="icons" on-oj-action="[[handleDone]]">
+                <span slot="startIcon" class="oj-ux-ico-check"></span>
+                Save
+              </oj-button>
+              <oj-button display="icons" on-oj-action="[[handleCancel]]">
+                <span slot="startIcon" class="oj-ux-ico-multiply"></span>
+                Cancel
+              </oj-button>
+            </oj-toolbar>
+          </oj-bind-if>
+        </template>
+      </oj-table>
+      <br />
+      <br />
+      <oj-label for="editedContent">Edited Data:</oj-label>
+      <oj-text-area
+        id="editedContent"
+        rows="3"
+        value="[[editedData]]"
+      ></oj-text-area>
+    </div>
+  </div>
+</div>
+
+
+

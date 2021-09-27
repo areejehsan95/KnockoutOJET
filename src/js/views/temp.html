@@ -1,0 +1,57 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+              
+      <div id='tableWrapper'>
+      
+        <oj-table id="table" aria-label="Tasks Table" data="[[dataprovider]]"
+        selection-mode='{"row": "multiple"}'
+        layout="fixed"
+        columns='[{"headerText": "Task Name", "sortProperty": "name", "weight": "2", "minWidth": "13rem"},
+                {"headerText": "Resource", "sortProperty": "resource", "minWidth": "8rem"},
+                {"headerText": "Start", "sortProperty": "start", "minWidth": "8rem"},
+                {"headerText": "End", "sortProperty": "end", "minWidth": "8rem"},
+                {"headerText": "Start+End", "minWidth": "8rem"},
+                {"headerText": "Text", "minWidth": "8rem"}]'
+        class="oj-sm-width-full oj-bg-body">
+      
+        <template slot='rowTemplate' data-oj-as='row'>
+          <tr>
+            <td>
+              <oj-row-expander data-oj-clickthrough="" context="[[row]]"></oj-row-expander>
+              <span>
+                <oj-bind-text value="[[row.item.data.name]]"></oj-bind-text>
+              </span>
+            </td>
+            <td>
+              <span>
+                <oj-bind-text value="[[row.item.data.resource]]"></oj-bind-text>
+              </span>
+            </td>
+            <td>
+              <span>
+                <oj-bind-text value="[[row.item.data.start]]"></oj-bind-text>
+              </span>
+            </td>
+            <td>
+              <span>
+                <oj-bind-text value="[[row.item.data.end]]"></oj-bind-text>
+              </span>
+            </td>
+            <td>
+              <span>
+                <oj-bind-number value="[[numberConverter.format(row.item.data.start+row.item.data.end)]]" converter="[[numberConverter]]"></oj-bind-text>
+              </span>
+            </td>
+            <td>
+              <span>
+                <oj-bind-text value="[[row.item.data.end]]"></oj-bind-text>
+              </span>
+            </td>
+          </tr>
+        </template>
+        </oj-table>
+      </div>
+      
+      
+    </div>
+  </div>

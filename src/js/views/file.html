@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+<script src="https://igniteui.com/js/modernizr.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.excel-bundled.js"></script>
+<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.spreadsheet-bundled.js"></script>
+<script src="https://www.igniteui.com/js/external/FileSaver.js"></script>
+<link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"></link>
+<link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet"></link>
+
+</head>	
+  <body class="demo-disable-bg-image">
+    <div id="sampleDemo" class="demo-padding demo-container">
+      <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                
+        <div id="parentContainer" class="oj-sm-padding-2x">
+            <oj-button on-oj-action='[[selectFiles]]'>
+               <span slot='startIcon' class='oj-ux-ico-plus'></span>
+               Add Files    
+            </oj-button>
+            <div class="oj-sm-padding-1x-top">Selected files:
+              <oj-bind-text value="[[fileNames]]"></oj-bind-text>
+          </div>
+        </div>
+        
+        <div class="spreadsheet-sample-btn">
+            <input type="file" id="input" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></input>
+            <span> Choose a file... </span>
+        </div>
+		<div>
+			<input class="spreadsheet-sample-btn" id="saveWorkbookBtn" type="button" value="Save Workbook" onclick="saveWorkbook()">
+		</input></div>
+		<div class="editing-controls-container">
+			<span for="enableEditing" class="show-row-text">
+				<div id="enableEditing"></div>
+				<span class="label-editing">Enable excel editing</span>
+			</span>
+		</div>
+		<div class="clear"></div>
+		
+		<div id="result"></div>
+		<div id="spreadsheet"></div>
+	</div>
+  <script>
+    $(function () {
+			var editingEnabled = true;
+			$("#spreadsheet").igSpreadsheet({
+				height: "600",
+				width: "100%",
+				isFormulaBarVisible: true,
+				editModeEntering: function (e, args) {
+					return editingEnabled;
+				}
+			});
+
+			$("#enableEditing").igCheckboxEditor({
+				checked: true,
+				valueChanged: function (evt, ui) {
+					editingEnabled = ui.newState;
+				}
+			});
+
+			//Check for Browser's - File API support
+			if (window.FileReader) {
+				$("#input").on("change", function () {
+					var excelFile,fileReader = new FileReader();
+
+					$("#result").hide();
+
+					fileReader.onload = function (e) {
+						var buffer = new Uint8Array(fileReader.result);
+
+						$.ig.excel.Workbook.load(buffer, function () {
+							workbook = arguments[0];
+							setWorkbook();
+
+						}, function (error) {
+							$("#result").text("The excel file is corrupted.");
+							$("#result").show(1000);
+						});
+					}
+
+					if (this.files.length > 0) {
+						excelFile = this.files[0];
+						if (excelFile.type === "application/vnd.ms-excel" || excelFile.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || (excelFile.type === "" && (excelFile.name.endsWith("xls") || excelFile.name.endsWith("xlsx")))) {
+							fileReader.readAsArrayBuffer(excelFile);
+						} else {
+							$("#result").text("The format of the file you have selected is not supported. Please select a valid Excel file ('.xls, *.xlsx').");
+							$("#result").show(1000);
+						}
+					}
+				})
+			} else {
+				$("#result").text("The File APIs are not fully supported in this browser.");
+				$("#result").show(1000);
+			}
+		});
+
+		function setWorkbook() {
+			if ($("#spreadsheet").igSpreadsheet !== undefined && workbook != null) {
+				//load specific workbook
+				$("#spreadsheet").igSpreadsheet("option", "workbook", workbook);
+			}
+		}
+
+		function saveWorkbook(workbook, name) {
+			$("#spreadsheet").igSpreadsheet("option", "workbook")
+				.save({ type: 'blob' }, function (data) {
+					saveAs(data, name);
+				}, function (error) {
+					alert('Error exporting: : ' + error);
+				});
+		}
+  </script>
+
+      
+</html>

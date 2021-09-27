@@ -1,0 +1,150 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+  
+      <div id="tableWrapper">
+        <div id="componentDemoContent" style="width: 1px; min-width: 100%;">                
+          <div id="sampleDemo" class="demo-padding demo-container">
+            <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                      
+              <div id="parentContainer" class="oj-sm-padding-2x">
+                <oj-button on-oj-action='[[selectFiles]]'>
+                  <span slot='startIcon' class='oj-ux-ico-plus'></span>
+                  Add Files    
+                </oj-button>
+                <oj-button on-oj-action='[[expandAll]]'>
+                  <span slot='startIcon' class='oj-ux-ico-row'></span>
+                  Expand All  
+                </oj-button>
+                <oj-button on-oj-action='[[exportFile]]'>
+                  <span slot='startIcon' class='oj-ux-ico-minus'></span>
+                  Export table to excel   
+                </oj-button>
+                <div class="oj-sm-padding-1x-top">Selected file :
+                  <oj-bind-text value="[[fileNames]]"></oj-bind-text>
+                </div>
+              </div>
+  
+             
+          <oj-table id="excel_data" aria-label="Departments Table" class='oj-bg-body demo-table-container'
+          data='[[dp]]'
+          row-renderer='[[KnockoutTemplateUtils.getRenderer("row_template", true)]]'
+          expanded= "all" 
+          layout="fixed" columns='[{"field": "name",
+                                  "weight": "3",
+                                  "minWidth": "10rem",
+                                  "headerText": "Name",
+                                  "template": "deptNameTemplate"},
+                                  {"field": "Price",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Price",
+                                  "template": "PriceTemplate"},
+                                  {"field": "Tax",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Tax",
+                                  "template": "TaxTemplate"},
+                                  {"field": "TotalPrice",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Price",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalPriceTemplate"},
+                                  {"field": "TotalSum",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Sum",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalSumTemplate"},
+                                  {"headerText": "Parent Id",
+                                  "width": "6.2rem",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                                  "template": "actionTemplate"},
+                                  {"headerText": "Bom Level",
+                                  "width": "6.2rem",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                                  "template": "actionTemplate"}]'>
+          </oj-table>
+        </div>
+        </div>
+  
+  
+        
+        <oj-table id="table" aria-label="Departments Table" class='oj-bg-body demo-table-container'
+          data='[[dataprovider]]'
+          row-renderer='[[KnockoutTemplateUtils.getRenderer("row_template", true)]]'
+          layout="fixed" columns='[{"field": "name",
+                                  "weight": "3",
+                                  "minWidth": "10rem",
+                                  "headerText": "Name",
+                                  "template": "deptNameTemplate"},
+                                  {"field": "Price",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Price",
+                                  "template": "PriceTemplate"},
+                                  {"field": "Tax",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Tax",
+                                  "template": "TaxTemplate"},
+                                  {"field": "TotalPrice",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Price",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalPriceTemplate"},
+                                  {"field": "TotalSum",
+                                  "weight": "3",
+                                  "minWidth": "5rem",
+                                  "headerText": "Total Sum",
+                                  "className": "oj-helper-text-align-center oj-read-only",
+                                  "template": "totalSumTemplate"},
+                                  {"field": "CustomParent",
+                                  "headerText": "Parent Id",
+                                  "width": "6.2rem",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                                  "template": "actionTemplate"},
+                                  {"field": "bomLevel",
+                                  "headerText": "Bom Level",
+                                  "width": "6.2rem",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                                  "template": "actionTemplate"}]'>
+          
+        </oj-table>
+        
+        
+        <script type="text/html" id="row_template">
+          <tr>
+            <td>
+              <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+                <span><oj-bind-text value="[[$context.data.name]]"></oj-bind-text></span>
+            </td>
+            <td>
+                <span><oj-bind-text value="[[$context.data.Price]]"></oj-bind-text></span>
+            </td>
+            <td>
+                <span><oj-bind-text value="[[$context.data.Tax]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[$context.data.TotalPrice]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[$context.data.TotalSum]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[$context.data.CustomParent]]"></oj-bind-text></span>
+            </td>
+            <td>
+              <span><oj-bind-text value="[[$context.data.bomLevel]]"></oj-bind-text></span>
+            </td>
+  
+          </tr>
+        </script>
+      </div>
+    </div>
+  </div>
